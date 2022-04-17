@@ -21,5 +21,6 @@ module.exports = {
     },
     swagger:{
         path: '/documentacion'
-    }
+    },
+    databaseURL: process.env.DATABASE_URL
 }
