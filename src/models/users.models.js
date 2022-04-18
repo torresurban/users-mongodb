@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 
 const Schema = mongoose.Schema;
@@ -19,7 +21,7 @@ const userSchema = new Schema({
         index: true
     },
     birthdate: Date,
-    /* password: {
+    password: {
         type: String,
         required: [true, 'La contraseña es necesaria']
     },
@@ -33,9 +35,12 @@ const userSchema = new Schema({
         type: Boolean,
         required: true,
         default: true
-    } */
+    }
 },
     { timestamps: true }
 );
+
+userSchema.plugin(uniqueValidator, { message: 'Ya existe en la Base de Datos' });
+userSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('users', userSchema);
