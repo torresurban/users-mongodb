@@ -8,10 +8,18 @@ const { getAllUsers,
         deleteUser
         } = require('../controllers/users.controllers.js')
 
-router.get('/', getAllUsers);
-router.post('/', createUser);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
-router.get('/:id', getById);
+const { 
+        postRequestValidation,
+        putRequestValidation,
+        deleteRequestValidation,
+        getRequestValidation,
+        getAllRequestValidation
+    } = require('../middleweare/user.middleware.js')
+
+router.get('/', getAllRequestValidation, getAllUsers);
+router.post('/', postRequestValidation, createUser);
+router.put('/:id', putRequestValidation, updateUser);
+router.delete('/:id', deleteRequestValidation, deleteUser);
+router.get('/:id', getRequestValidation, getById);
 
 module.exports = router;
